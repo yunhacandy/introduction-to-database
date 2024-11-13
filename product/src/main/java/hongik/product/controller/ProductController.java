@@ -44,7 +44,7 @@ public class ProductController {
 
     // 상품 삭제
     @PostMapping("/products/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
+    public String deleteProduct(@PathVariable("id") Long id) {
         log.info("상품 삭제 요청: id={}", id);
         productService.deleteProduct(id);
         log.info("상품 삭제 완료: id={}", id);
