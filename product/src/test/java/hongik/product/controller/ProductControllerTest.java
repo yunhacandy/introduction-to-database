@@ -87,4 +87,14 @@ class ProductControllerTest {
                         products));    // 모델에 추가된 products 속성 값이 테스트에서 준비한 products 목록과 동일한지 검증
     }
 
+    @Test
+    void 상품_삭제() throws Exception {
+        Long productId = 1L;
+        doNothing().when(productService).deleteProduct(productId);
+
+        ResultActions result = mockMvc.perform(post("/products/delete/{id}", productId));
+
+        result.andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/products"));
+    }
 }
