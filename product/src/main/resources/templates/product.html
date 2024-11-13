@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 관리</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="my-4">상품 목록</h1>
+
+  <!-- 상품 목록 -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>상품명</th>
+      <th>가격</th>
+      <th>설명</th>
+      <th>삭제</th> <!-- 삭제 열 추가 -->
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 상품 목록 반복 출력 -->
+    <tr th:each="product : ${products}">
+      <td th:text="${product.name}"></td>
+      <td th:text="${product.price}"></td>
+      <td th:text="${product.description}"></td>
+      <!-- 삭제 버튼 추가 -->
+      <td>
+        <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post">
+          <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2 class="my-4">상품 등록</h2>
+
+  <!-- 상품 등록 폼 -->
+  <form th:action="@{/products}" method="post">
+    <div class="mb-3">
+      <label for="name" class="form-label">상품명</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">가격</label>
+      <input type="number" class="form-control" id="price" name="price" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">상품 설명</label>
+      <textarea class="form-control" id="description" name="description" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">등록</button>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
