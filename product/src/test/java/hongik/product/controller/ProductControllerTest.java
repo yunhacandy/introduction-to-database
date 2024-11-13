@@ -73,4 +73,18 @@ class ProductControllerTest {
         result.andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/products"));
     }
+
+    @Test
+    void 상품_목록_조회() throws Exception {
+        List<Product> products = Arrays.asList(product1, product2);
+        given(productService.findAllProducts()).willReturn(products);
+
+        mockMvc.perform(get("/products"))
+                .andExpect(status().isOk()) //상태 코드가 200인지 확인
+                .andExpect(view().name("product"))  // 컨트롤러가 반환하는 뷰 이름이 product인가
+                .andExpect(model().attributeExists("products")) // 뷰 모델에 products 속성이 존재하는지 검증
+                .andExpect(model().attribute("products",
+                        products));    // 모델에 추가된 products 속성 값이 테스트에서 준비한 products 목록과 동일한지 검증
+    }
+
 }
