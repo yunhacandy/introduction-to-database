@@ -1,4 +1,4 @@
-package hongik.loginProject;
+package hongik.loginProject.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,9 +14,9 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long userId;
+    private Long userId;
 
-    String email;
-    String password;
-    String username;
+    private String email;
+    private String password;
+    private String username;
 }

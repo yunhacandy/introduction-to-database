@@ -1,5 +1,7 @@
-package hongik.loginProject;
+package hongik.loginProject.controller;
 
+import hongik.loginProject.entity.User;
+import hongik.loginProject.repository.UserRepository;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -34,7 +36,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {
         User user = userRepository.findByUsername(username);
-        if (Objects.equals(user.password, password)) {
+        if (Objects.equals(user.getPassword(), password)) {
             model.addAttribute("username", username);
             return "loginSuccess";
         } else {
