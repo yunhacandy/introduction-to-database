@@ -34,7 +34,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
+    public String login(@RequestParam(name = "username") String username,
+                        @RequestParam(name = "password") String password,
+                        Model model) {
         User user = userRepository.findByUsername(username);
         if (Objects.equals(user.getPassword(), password)) {
             model.addAttribute("username", username);
